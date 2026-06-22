@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth" style="scroll-behavior: smooth; min-height: 100%;"><head>
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Estética Avançada | Ciência, Arte e Naturalidade</title>
+    <meta name="description" content="Clínica de estética de alto padrão especializada em realçar sua beleza natural com tecnologia de ponta e cuidado humanizado.">
+
+    <!-- Premium Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+
+    <!-- Core Dependencies -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'aura-lilac': '#FBF9FE',
+                        'aura-olive': '#8FA89B',
+                        'aura-gold': '#D4AF37',
+                        'aura-graphite': '#2C2C2C',
+                        'aura-white': '#FFFFFF',
+                    },
+                    fontFamily: {
+                        serif: ['Fraunces', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-soft': 'pulse-soft 3s ease-in-out infinite',
+                        'marquee': 'marquee 40s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        'pulse-soft': {
+                            '0%, 100%': { opacity: '1', transform: 'scale(1)' },
+                            '50%': { opacity: '0.8', transform: 'scale(1.02)' },
+                        },
+                        marquee: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-50%)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --aura-lilac: #FBF9FE;
+            --aura-olive: #8FA89B;
+            --aura-gold: #D4AF37;
+            --aura-graphite: #2C2C2C;
+        }
+
+        body {
+            background-color: var(--aura-lilac);
+            color: var(--aura-graphite);
+            overflow-x: hidden;
+        }
+
+        .glass-header {
+            background: rgba(251, 249, 254, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(143, 168, 155, 0.1);
+        }
+
+        .nav-link {
+            position: relative;
+            padding-bottom: 4px;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--aura-olive);
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1.5rem;
+        }
+
+        .bento-card {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(143, 168, 155, 0.05);
+        }
+
+        .bento-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(44, 44, 44, 0.05);
+            border-color: rgba(143, 168, 155, 0.2);
+        }
+
+        .infinite-scroll-container {
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        .infinite-scroll-track {
+            display: flex;
+            width: max-content;
+            animation: marquee 60s linear infinite;
+        }
+
+        .infinite-scroll-track:hover {
+            animation-play-state: paused;
+        }
+
+        .service-card {
+            width: 350px;
+            margin-right: 2rem;
+            flex-shrink: 0;
+            white-space: normal;
+        }
+
+        .input-aura {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(44, 44, 44, 0.2);
+            padding: 1rem 0;
+            transition: all 0.4s ease;
+            width: 100%;
+        }
+
+        .input-aura:focus {
+            outline: none;
+            border-bottom-color: var(--aura-olive);
+            padding-left: 8px;
+        }
+
+        .magnetic-btn {
+            transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .photo-mask {
+            mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--aura-lilac); }
+        ::-webkit-scrollbar-thumb { background: var(--aura-olive); border-radius: 10px; }
+
+        @media (max-width: 768px) {
+            .infinite-scroll-track {
+                animation: none;
+                overflow-x: auto;
+                padding-bottom: 2rem;
+            }
+            .service-card { width: 280px; }
+        }
+    </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"><script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script><style id="ryze-compatibility-styles">
+    .elementor-section, .elementor-container, .elementor-column, .elementor-widget-wrap, .elementor-widget-container { box-sizing: border-box; }
+    .elementor-section { position: relative; width: 100%; }
+    .elementor-container { display: flex; flex-wrap: wrap; width: 100%; margin-left: auto; margin-right: auto; }
+    .elementor-column { min-height: 1px; display: flex; }
+    .elementor-widget-wrap { position: relative; width: 100%; display: flex; flex-direction: column; }
+    .elementor-widget { position: relative; }
+    .elementor-button, .elementor-button-link { display: inline-flex; align-items: center; justify-content: center; gap: .55rem; text-decoration: none; cursor: pointer; }
+    .elementor-button-content-wrapper { display: inline-flex; align-items: center; justify-content: center; gap: .55rem; }
+    .elementor-icon-list-items { list-style: none; margin: 0; padding: 0; }
+    .elementor-icon-list-item { display: flex; align-items: center; gap: .65rem; }
+    .elementor-accordion-item, .elementor-toggle-item { border-bottom: 1px solid rgba(148, 163, 184, .18); }
+    .elementor-tab-title, .elementor-toggle-title { cursor: pointer; }
+    .elementor-tab-content, .elementor-toggle-content { display: none; }
+    .elementor-tab-content.elementor-active, .elementor-toggle-content.elementor-active { display: block; }
+    .elementor-image-carousel-wrapper, .elementor-swiper, .swiper, .swiper-container { width: 100%; overflow: hidden; }
+    .swiper-wrapper { display: flex; }
+    .swiper-slide { flex-shrink: 0; position: relative; }
+    @media (max-width: 768px) {
+      .elementor-container { flex-direction: column; }
+      .elementor-column { width: 100% !important; }
+    }
+  </style><script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+
+
+
+      <script id="ryze-visual-health">
+        (function() {
+          if (window.__RYZE_VISUAL_HEALTH_INSTALLED__) return;
+          window.__RYZE_VISUAL_HEALTH_INSTALLED__ = true;
+
+          function isVisibleElement(el) {
+            if (!el || !el.getBoundingClientRect) return false;
+            var style = window.getComputedStyle(el);
+            if (style.display === 'none' || style.visibility === 'hidden' || Number(style.opacity || 1) < 0.03) return false;
+            var rect = el.getBoundingClientRect();
+            return rect.width > 1 && rect.height > 1;
+          }
+
+          function isDecorativeLayer(el) {
+            if (!el || !el.getBoundingClientRect) return false;
+            var signature = [
+              el.id || '',
+              String(el.className || ''),
+              el.getAttribute && (el.getAttribute('data-ryze-id') || ''),
+              el.getAttribute && (el.getAttribute('aria-label') || '')
+            ].join(' ').toLowerCase();
+            if (/noise|ruido|ruído|grain|static|scanline|texture|vignette|overlay|cursor|particle|stars|glow|blur|blob|radial|backdrop|background|\bbg[-_]/i.test(signature)) {
+              return true;
+            }
+
+            var style = window.getComputedStyle(el);
+            var rect = el.getBoundingClientRect();
+            var textLength = (el.innerText || el.textContent || '').replace(/\s+/g, ' ').trim().length;
+            var hasMeaningfulChildren = !!el.querySelector('h1,h2,h3,p,a,button,li,img,video,canvas,svg,form,input,textarea');
+            var coversViewport = rect.width >= window.innerWidth * 0.7 && rect.height >= window.innerHeight * 0.5;
+
+            return (style.position === 'fixed' || style.position === 'absolute') && coversViewport && textLength < 20 && !hasMeaningfulChildren;
+          }
+
+          function clampDecorativeNoiseLayers() {
+            document.querySelectorAll('[class*="noise"], [id*="noise"], [class*="ruido"], [id*="ruido"], [class*="grain"], [id*="grain"], [class*="static"], [id*="static"], [class*="scanline"], [id*="scanline"], [class*="texture"], [id*="texture"]').forEach(function(el) {
+              if (!isDecorativeLayer(el)) return;
+              var opacity = Number(window.getComputedStyle(el).opacity || 1);
+              if (!Number.isFinite(opacity) || opacity > 0.04) {
+                el.style.opacity = '0.025';
+              }
+              el.style.pointerEvents = 'none';
+            });
+          }
+
+          function repairStuckVisualState() {
+            var repaired = false;
+            document.documentElement.style.minHeight = document.documentElement.style.minHeight || '100%';
+            document.body.style.minHeight = document.body.style.minHeight || '100%';
+            clampDecorativeNoiseLayers();
+
+            var pageSections = Array.from(document.querySelectorAll('.page-section'));
+            if (document.body.classList.contains('spa-mode') && pageSections.length === 0) {
+              document.body.classList.remove('spa-mode');
+              repaired = true;
+            }
+            if (document.body.classList.contains('spa-mode') && pageSections.length > 0 && !document.querySelector('.page-section.active')) {
+              pageSections[0].classList.add('active');
+              repaired = true;
+            }
+
+            document.querySelectorAll('main, section, header, footer, [data-ryze-id], .page-section.active, .page-shell, #root > div, body > main, body > section, body > header, body > footer, body > div').forEach(function(el) {
+              if (el.closest('[data-ryze-ignore="true"]')) return;
+              if (isDecorativeLayer(el)) return;
+
+              var style = window.getComputedStyle(el);
+              var className = String(el.className || '');
+              var isRuntimeHidden = /modal|drawer|dropdown|menu|hidden|popover|tooltip/i.test(className) && !/hero|section|page-section|active/i.test(className);
+              if (isRuntimeHidden) return;
+
+              if (style.visibility === 'hidden') {
+                el.style.visibility = 'visible';
+                repaired = true;
+              }
+
+              var inlineOpacity = String(el.style.opacity || '').trim();
+              var isExplicitlyHidden = style.opacity === '0' || /^0(?:\.0+)?$/.test(inlineOpacity) || /(?:^|\s)opacity-0(?:\s|$)/.test(className);
+              if (isExplicitlyHidden) {
+                el.style.opacity = '1';
+                repaired = true;
+              }
+              if (/translateY\(/i.test(el.style.transform || '') && !/gsap|swiper|motion/i.test(className)) {
+                el.style.transform = 'none';
+                repaired = true;
+              }
+            });
+
+            return repaired;
+          }
+
+          function inspectVisualHealth() {
+            var repaired = repairStuckVisualState();
+            var body = document.body;
+            var textLength = (body.innerText || body.textContent || '').replace(/\s+/g, ' ').trim().length;
+            var visibleTextNodes = Array.from(document.querySelectorAll('h1,h2,h3,p,a,button,li,span')).filter(function(el) {
+              return isVisibleElement(el) && (el.innerText || el.textContent || '').trim().length > 1;
+            }).length;
+            var visibleMediaNodes = Array.from(document.querySelectorAll('img,video,canvas,svg,iframe,[style*="background-image"]')).filter(isVisibleElement).length;
+            var docHeight = Math.max(
+              body.scrollHeight || 0,
+              document.documentElement.scrollHeight || 0,
+              body.getBoundingClientRect ? body.getBoundingClientRect().height : 0
+            );
+            var ids = Array.from(document.querySelectorAll('[id]')).map(function(el) { return el.id; }).filter(Boolean);
+            var duplicateIdCount = ids.length - new Set(ids).size;
+            var brokenAnchorCount = Array.from(document.querySelectorAll('a[href^="#"]')).filter(function(anchor) {
+              var href = anchor.getAttribute('href') || '';
+              return href.length > 1 && !document.getElementById(href.slice(1));
+            }).length;
+            var failedMediaCount = Array.from(document.querySelectorAll('img')).filter(function(img) {
+              return img.complete && img.naturalWidth === 0;
+            }).length;
+
+            var issues = [];
+            if (docHeight < 160) issues.push('HEIGHT_TOO_SMALL');
+            if (textLength < 40 && visibleMediaNodes === 0) issues.push('NO_MEANINGFUL_CONTENT');
+            if (visibleTextNodes === 0 && visibleMediaNodes === 0) issues.push('NO_VISIBLE_NODES');
+            if (body.children.length === 0) issues.push('EMPTY_BODY');
+            if (failedMediaCount > 0) issues.push('FAILED_MEDIA');
+
+            window.parent.postMessage({
+              type: 'RYZE_VISUAL_HEALTH',
+              ok: issues.length === 0,
+              issues: issues,
+              repaired: repaired,
+              metrics: {
+                textLength: textLength,
+                visibleTextNodes: visibleTextNodes,
+                visibleMediaNodes: visibleMediaNodes,
+                docHeight: docHeight,
+                duplicateIdCount: duplicateIdCount,
+                brokenAnchorCount: brokenAnchorCount,
+                failedMediaCount: failedMediaCount
+              }
+            }, '*');
+          }
+
+          function scheduleChecks() {
+            setTimeout(inspectVisualHealth, 450);
+            setTimeout(inspectVisualHealth, 1200);
+            setTimeout(inspectVisualHealth, 2600);
+          }
+
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', scheduleChecks, { once: true });
+          } else {
+            scheduleChecks();
+          }
+          window.addEventListener('load', scheduleChecks);
+        })();
+      </script>
+    <style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:Plus Jakarta Sans, sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.inset-0{inset:0px}.-bottom-6{bottom:-1.5rem}.-left-6{left:-1.5rem}.-right-20{right:-5rem}.bottom-0{bottom:0px}.left-0{left:0px}.right-0{right:0px}.top-0{top:0px}.top-1\/4{top:25%}.-z-10{z-index:-10}.z-10{z-index:10}.z-50{z-index:50}.mx-auto{margin-left:auto;margin-right:auto}.-mr-32{margin-right:-8rem}.-mt-32{margin-top:-8rem}.mb-1{margin-bottom:0.25rem}.mb-10{margin-bottom:2.5rem}.mb-16{margin-bottom:4rem}.mb-2{margin-bottom:0.5rem}.mb-20{margin-bottom:5rem}.mb-24{margin-bottom:6rem}.mb-3{margin-bottom:0.75rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mb-8{margin-bottom:2rem}.mr-1{margin-right:0.25rem}.mt-12{margin-top:3rem}.mt-4{margin-top:1rem}.mt-6{margin-top:1.5rem}.line-clamp-2{overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2}.block{display:block}.inline-block{display:inline-block}.inline{display:inline}.flex{display:flex}.grid{display:grid}.hidden{display:none}.h-10{height:2.5rem}.h-12{height:3rem}.h-14{height:3.5rem}.h-20{height:5rem}.h-3{height:0.75rem}.h-32{height:8rem}.h-4{height:1rem}.h-5{height:1.25rem}.h-6{height:1.5rem}.h-64{height:16rem}.h-7{height:1.75rem}.h-96{height:24rem}.h-full{height:100%}.min-h-screen{min-height:100vh}.w-10{width:2.5rem}.w-12{width:3rem}.w-14{width:3.5rem}.w-3{width:0.75rem}.w-4{width:1rem}.w-5{width:1.25rem}.w-6{width:1.5rem}.w-64{width:16rem}.w-7{width:1.75rem}.w-96{width:24rem}.w-full{width:100%}.max-w-5xl{max-width:64rem}.max-w-7xl{max-width:80rem}.max-w-\[240px\]{max-width:240px}.max-w-lg{max-width:32rem}.max-w-md{max-width:28rem}.max-w-xs{max-width:20rem}.flex-1{flex:1 1 0%}.-rotate-3{--tw-rotate:-3deg;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.scale-95{--tw-scale-x:.95;--tw-scale-y:.95;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@keyframes float{0%, 100%{transform:translateY(0)}50%{transform:translateY(-20px)}}.animate-float{animation:float 6s ease-in-out infinite}@keyframes pulse-soft{0%, 100%{opacity:1;transform:scale(1)}50%{opacity:0.8;transform:scale(1.02)}}.animate-pulse-soft{animation:pulse-soft 3s ease-in-out infinite}.cursor-pointer{cursor:pointer}.appearance-none{-webkit-appearance:none;appearance:none}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-end{align-items:flex-end}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-12{gap:3rem}.gap-2{gap:0.5rem}.gap-20{gap:5rem}.gap-3{gap:0.75rem}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.gap-8{gap:2rem}.gap-x-12{column-gap:3rem}.gap-y-8{row-gap:2rem}.space-x-10 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(2.5rem * var(--tw-space-x-reverse));margin-left:calc(2.5rem * calc(1 - var(--tw-space-x-reverse)))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-y-8 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(2rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(2rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.scroll-smooth{scroll-behavior:smooth}.text-balance{text-wrap:balance}.break-words{overflow-wrap:break-word}.rounded-2xl{border-radius:1rem}.rounded-3xl{border-radius:1.5rem}.rounded-\[32px\]{border-radius:32px}.rounded-\[40px\]{border-radius:40px}.rounded-full{border-radius:9999px}.rounded-xl{border-radius:0.75rem}.border{border-width:1px}.border-t{border-top-width:1px}.border-aura-graphite\/10{border-color:rgb(44 44 44 / 0.1)}.border-aura-olive\/10{border-color:rgb(143 168 155 / 0.1)}.border-aura-olive\/20{border-color:rgb(143 168 155 / 0.2)}.border-aura-olive\/5{border-color:rgb(143 168 155 / 0.05)}.bg-aura-gold{--tw-bg-opacity:1;background-color:rgb(212 175 55 / var(--tw-bg-opacity, 1))}.bg-aura-gold\/10{background-color:rgb(212 175 55 / 0.1)}.bg-aura-gold\/20{background-color:rgb(212 175 55 / 0.2)}.bg-aura-lilac{--tw-bg-opacity:1;background-color:rgb(251 249 254 / var(--tw-bg-opacity, 1))}.bg-aura-lilac\/50{background-color:rgb(251 249 254 / 0.5)}.bg-aura-olive{--tw-bg-opacity:1;background-color:rgb(143 168 155 / var(--tw-bg-opacity, 1))}.bg-aura-olive\/10{background-color:rgb(143 168 155 / 0.1)}.bg-aura-olive\/5{background-color:rgb(143 168 155 / 0.05)}.bg-aura-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-gradient-to-t{background-image:linear-gradient(to top, var(--tw-gradient-stops))}.from-aura-white{--tw-gradient-from:#FFFFFF var(--tw-gradient-from-position);--tw-gradient-to:rgb(255 255 255 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.to-transparent{--tw-gradient-to:transparent var(--tw-gradient-to-position)}.object-cover{object-fit:cover}.\!p-0{padding:0px !important}.p-4{padding:1rem}.p-6{padding:1.5rem}.p-8{padding:2rem}.px-4{padding-left:1rem;padding-right:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.px-8{padding-left:2rem;padding-right:2rem}.py-1\.5{padding-top:0.375rem;padding-bottom:0.375rem}.py-2\.5{padding-top:0.625rem;padding-bottom:0.625rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.py-32{padding-top:8rem;padding-bottom:8rem}.py-4{padding-top:1rem;padding-bottom:1rem}.py-5{padding-top:1.25rem;padding-bottom:1.25rem}.pb-12{padding-bottom:3rem}.pt-12{padding-top:3rem}.pt-20{padding-top:5rem}.pt-24{padding-top:6rem}.text-center{text-align:center}.text-right{text-align:right}.font-sans{font-family:Plus Jakarta Sans, sans-serif}.font-serif{font-family:Fraunces, serif}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-5xl{font-size:3rem;line-height:1}.text-\[10px\]{font-size:10px}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-bold{font-weight:700}.font-medium{font-weight:500}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.italic{font-style:italic}.leading-\[1\.1\]{line-height:1.1}.leading-relaxed{line-height:1.625}.leading-tight{line-height:1.25}.tracking-\[0\.3em\]{letter-spacing:0.3em}.tracking-tight{letter-spacing:-0.025em}.tracking-tighter{letter-spacing:-0.05em}.tracking-wide{letter-spacing:0.025em}.tracking-widest{letter-spacing:0.1em}.text-aura-gold{--tw-text-opacity:1;color:rgb(212 175 55 / var(--tw-text-opacity, 1))}.text-aura-graphite{--tw-text-opacity:1;color:rgb(44 44 44 / var(--tw-text-opacity, 1))}.text-aura-graphite\/40{color:rgb(44 44 44 / 0.4)}.text-aura-graphite\/50{color:rgb(44 44 44 / 0.5)}.text-aura-graphite\/60{color:rgb(44 44 44 / 0.6)}.text-aura-graphite\/70{color:rgb(44 44 44 / 0.7)}.text-aura-graphite\/80{color:rgb(44 44 44 / 0.8)}.text-aura-olive{--tw-text-opacity:1;color:rgb(143 168 155 / var(--tw-text-opacity, 1))}.text-slate-950{--tw-text-opacity:1;color:rgb(2 6 23 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.opacity-80{opacity:0.8}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-xl{--tw-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-aura-olive\/20{--tw-shadow-color:rgb(143 168 155 / 0.2);--tw-shadow:var(--tw-shadow-colored)}.shadow-aura-olive\/5{--tw-shadow-color:rgb(143 168 155 / 0.05);--tw-shadow:var(--tw-shadow-colored)}.blur-3xl{--tw-blur:blur(64px);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.blur-\[120px\]{--tw-blur:blur(120px);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-500{transition-duration:500ms}.duration-700{transition-duration:700ms}.hover\:border-aura-olive\/20:hover{border-color:rgb(143 168 155 / 0.2)}.hover\:bg-aura-graphite\/5:hover{background-color:rgb(44 44 44 / 0.05)}.hover\:bg-aura-olive:hover{--tw-bg-opacity:1;background-color:rgb(143 168 155 / var(--tw-bg-opacity, 1))}.hover\:bg-opacity-90:hover{--tw-bg-opacity:0.9}.hover\:text-aura-graphite:hover{--tw-text-opacity:1;color:rgb(44 44 44 / var(--tw-text-opacity, 1))}.hover\:text-aura-olive:hover{--tw-text-opacity:1;color:rgb(143 168 155 / var(--tw-text-opacity, 1))}.hover\:text-slate-950:hover{--tw-text-opacity:1;color:rgb(2 6 23 / var(--tw-text-opacity, 1))}.hover\:underline:hover{-webkit-text-decoration-line:underline;text-decoration-line:underline}.hover\:shadow-2xl:hover{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.hover\:shadow-xl:hover{--tw-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.hover\:shadow-aura-olive\/30:hover{--tw-shadow-color:rgb(143 168 155 / 0.3);--tw-shadow:var(--tw-shadow-colored)}.hover\:shadow-aura-olive\/40:hover{--tw-shadow-color:rgb(143 168 155 / 0.4);--tw-shadow:var(--tw-shadow-colored)}.group\/link:hover .group-hover\/link\:translate-x-1{--tw-translate-x:0.25rem;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.group:hover .group-hover\:translate-x-1{--tw-translate-x:0.25rem;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.group:hover .group-hover\:scale-110{--tw-scale-x:1.1;--tw-scale-y:1.1;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.group:hover .group-hover\:bg-aura-gold{--tw-bg-opacity:1;background-color:rgb(212 175 55 / var(--tw-bg-opacity, 1))}.group:hover .group-hover\:bg-aura-olive{--tw-bg-opacity:1;background-color:rgb(143 168 155 / var(--tw-bg-opacity, 1))}.group:hover .group-hover\:text-aura-olive{--tw-text-opacity:1;color:rgb(143 168 155 / var(--tw-text-opacity, 1))}.group:hover .group-hover\:text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.peer:checked ~ .peer-checked\:border-aura-olive{--tw-border-opacity:1;border-color:rgb(143 168 155 / var(--tw-border-opacity, 1))}.peer:checked ~ .peer-checked\:bg-aura-olive\/5{background-color:rgb(143 168 155 / 0.05)}.peer:checked ~ .peer-checked\:text-aura-olive{--tw-text-opacity:1;color:rgb(143 168 155 / var(--tw-text-opacity, 1))}@media (min-width: 640px){.sm\:inline-flex{display:inline-flex}}@media (min-width: 768px){.md\:col-span-1{grid-column:span 1 / span 1}.md\:col-span-2{grid-column:span 2 / span 2}.md\:flex{display:flex}.md\:hidden{display:none}.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.md\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.md\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}.md\:flex-row{flex-direction:row}.md\:p-16{padding:4rem}.md\:text-5xl{font-size:3rem;line-height:1}.md\:text-6xl{font-size:3.75rem;line-height:1}.md\:text-7xl{font-size:4.5rem;line-height:1}}@media (min-width: 1024px){.lg\:col-span-5{grid-column:span 5 / span 5}.lg\:col-span-7{grid-column:span 7 / span 7}.lg\:h-\[700px\]{height:700px}.lg\:max-w-none{max-width:none}.lg\:grid-cols-12{grid-template-columns:repeat(12, minmax(0, 1fr))}.lg\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}}</style><style> * { backface-visibility: hidden; -webkit-font-smoothing: antialiased; } .noise-overlay, canvas { pointer-events: none !important; will-change: transform; } nav, header, [data-ryze-id="navbar"] { pointer-events: auto !important; } button, a { cursor: pointer !important; pointer-events: auto !important; } </style></head>
+<body class="font-sans antialiased" style="min-height: 100%;">
+
+    <!-- Header -->
+    <header class="fixed top-0 w-full z-50 glass-header" data-ryze-id="main-header" style="z-index: 99999; pointer-events: auto;" id="ryze-bg-0">
+        <nav class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <a href="#home" class="text-2xl font-serif font-semibold tracking-tight text-aura-graphite" style="pointer-events: auto; position: relative; z-index: 100000;" id="ryze-txt-1">
+                    AURA<span class="text-aura-olive" style="color: rgb(15, 23, 42) !important; -webkit-text-fill-color: rgb(15, 23, 42) !important; pointer-events: auto;" id="ryze-txt-2">.</span>
+                </a>
+            </div>
+
+            <div class="hidden md:flex items-center space-x-10 text-sm font-medium tracking-wide text-aura-graphite/80">
+                <a href="#home" class="nav-link hover:text-aura-graphite transition-colors" style="color: rgb(15, 23, 42); pointer-events: auto; position: relative; z-index: 100000;" id="ryze-txt-4">Início</a>
+                <a href="#sobre" class="nav-link hover:text-aura-graphite transition-colors" style="color: rgb(15, 23, 42); pointer-events: auto; position: relative; z-index: 100000;" id="ryze-txt-5">Sobre Nós</a>
+                <a href="#servicos" class="nav-link hover:text-aura-graphite transition-colors" style="color: rgb(15, 23, 42); pointer-events: auto; position: relative; z-index: 100000;" id="ryze-txt-6">Serviços</a>
+                <a href="#valores" class="nav-link hover:text-aura-graphite transition-colors" style="color: rgb(15, 23, 42); pointer-events: auto; position: relative; z-index: 100000;" id="ryze-txt-7">Valores</a>
+                <a href="#agendamento" class="nav-link hover:text-aura-graphite transition-colors" style="color: rgb(15, 23, 42); pointer-events: auto; position: relative; z-index: 100000;" id="ryze-txt-8">Agendamento</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <a href="#agendamento" class="hidden sm:inline-flex bg-aura-olive text-slate-950 px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-opacity-90 transition-all animate-pulse-soft shadow-lg shadow-aura-olive/20" style="pointer-events: auto; position: relative; z-index: 100000;" id="ryze-txt-10">
+                    Agendar Consulta
+                </a>
+                <button class="md:hidden text-aura-graphite" onclick="toggleMobileMenu()" style="pointer-events: auto; position: relative; z-index: 100000;" id="ryze-txt-11">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="menu" aria-hidden="true" class="lucide lucide-menu w-6 h-6" id="ryze-icon-0" style="pointer-events: auto;"><path d="M4 5h16"></path><path d="M4 12h16"></path><path d="M4 19h16"></path></svg>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-aura-white border-t border-aura-olive/10 p-6 flex flex-col space-y-4">
+            <a href="#home" onclick="toggleMobileMenu()" class="text-lg font-medium" style="color: rgb(15, 23, 42); pointer-events: auto; position: relative; z-index: 100000;" id="ryze-txt-13">Início</a>
+            <a href="#sobre" onclick="toggleMobileMenu()" class="text-lg font-medium" style="color: rgb(15, 23, 42); pointer-events: auto; position: relative; z-index: 100000;" id="ryze-txt-14">Sobre Nós</a>
+            <a href="#servicos" onclick="toggleMobileMenu()" class="text-lg font-medium" style="color: rgb(15, 23, 42); pointer-events: auto; position: relative; z-index: 100000;" id="ryze-txt-15">Serviços</a>
+            <a href="#valores" onclick="toggleMobileMenu()" class="text-lg font-medium" style="color: rgb(15, 23, 42); pointer-events: auto; position: relative; z-index: 100000;" id="ryze-txt-16">Valores</a>
+            <a href="#agendamento" onclick="toggleMobileMenu()" class="text-lg font-medium" style="color: rgb(15, 23, 42); pointer-events: auto; position: relative; z-index: 100000;" id="ryze-txt-17">Agendamento</a>
+        </div>
+    </header>
+
+    <main id="page-content" style="">
+
+        <!-- Hero Section -->
+        <section id="home" class="relative min-h-screen flex items-center pt-20 overflow-hidden" data-ryze-id="hero-section" style="">
+            <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="z-10" data-gsap="reveal" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px); visibility: inherit;">
+                    <span class="inline-block px-4 py-1.5 rounded-full bg-aura-olive/10 text-aura-olive text-xs font-bold tracking-widest uppercase mb-6" id="ryze-txt-20" style="pointer-events: auto;">
+                        Estética Avançada
+                    </span>
+                    <h1 class="text-5xl md:text-7xl font-serif leading-[1.1] text-aura-graphite mb-8 text-balance break-words" id="ryze-txt-21" style="pointer-events: auto;">
+                        Sua beleza natural, <br>
+                        <span class="italic text-aura-olive" id="ryze-txt-22" style="pointer-events: auto;">realçada</span> com ciência e arte.
+                    </h1>
+                    <p class="text-lg text-aura-graphite/70 mb-10 max-w-lg leading-relaxed" id="ryze-txt-23" style="pointer-events: auto;">
+                        Na Aura, fundimos tecnologia médica de última geração com uma visão artística personalizada para revelar a sua melhor versão.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#agendamento" class="bg-aura-olive text-slate-950 px-8 py-4 rounded-full font-bold hover:shadow-xl hover:shadow-aura-olive/30 transition-all flex items-center gap-2 group" id="ryze-txt-25" style="pointer-events: auto;">
+                            Começar Jornada
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-right" aria-hidden="true" class="lucide lucide-arrow-right w-4 h-4 group-hover:translate-x-1 transition-transform" id="ryze-icon-1" style="pointer-events: auto;"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                        </a>
+                        <a href="#servicos" class="px-8 py-4 rounded-full font-bold border border-aura-graphite/10 hover:bg-aura-graphite/5 transition-all" style="color: rgb(15, 23, 42); pointer-events: auto;" id="ryze-txt-26">
+                            Conhecer Tratamentos
+                        </a>
+                    </div>
+                </div>
+
+                <div class="relative lg:h-[700px] flex justify-center items-center" data-gsap="fade-scale" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px); filter: blur(0px); visibility: inherit;">
+                    <div class="absolute inset-0 bg-aura-olive/5 rounded-[40px] -rotate-3 scale-95"></div>
+                    <div class="relative w-full h-full max-w-md lg:max-w-none animate-float">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&amp;fit=crop&amp;w=1400&amp;q=85" alt="Procedimento estético humanizado" class="w-full h-full object-cover rounded-[32px] shadow-2xl photo-mask" onerror="if(!this.dataset.ryzeFallbackApplied){this.dataset.ryzeFallbackApplied='true';this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&amp;fit=crop&amp;w=1400&amp;q=85';this.style.opacity='1';}" id="ryze-img-0" style="opacity: 1; pointer-events: auto;">
+
+                        <!-- Floating Badge -->
+                        <div class="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-xl border border-aura-olive/10 flex items-center gap-4 max-w-[240px]">
+                            <div class="w-12 h-12 bg-aura-gold/20 rounded-full flex items-center justify-center text-aura-gold">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="sparkles" aria-hidden="true" class="lucide lucide-sparkles w-6 h-6" id="ryze-icon-2" style="pointer-events: auto;"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"></path><path d="M20 2v4"></path><path d="M22 4h-4"></path><circle cx="4" cy="20" r="2"></circle></svg>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold uppercase tracking-tighter text-aura-olive" id="ryze-txt-33" style="pointer-events: auto;">Protocolo Glow</p>
+                                <p class="text-[10px] text-aura-graphite/60" id="ryze-txt-34" style="pointer-events: auto;">Resultados visíveis em 24h</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Background Decoration -->
+            <div class="absolute top-1/4 -right-20 w-96 h-96 bg-aura-olive/5 rounded-full blur-[120px] -z-10"></div>
+            <div class="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-aura-white to-transparent"></div>
+        </section>
+
+        <!-- About Section -->
+        <section id="sobre" class="py-32 bg-aura-white" data-ryze-id="about-section" style="">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center mb-24">
+                    <div data-gsap="clip-up" style="translate: none; rotate: none; scale: none; opacity: 1; clip-path: inset(0px 0px 100%); visibility: visible;">
+                        <h2 class="text-4xl md:text-5xl font-serif mb-8 leading-tight break-words" style="color: rgb(15, 23, 42); pointer-events: auto;" id="ryze-txt-40">
+                            Onde o cuidado encontra a <span class="text-aura-gold italic" id="ryze-txt-41" style="pointer-events: auto;">excelência</span>.
+                        </h2>
+                        <p class="text-aura-graphite/70 text-lg leading-relaxed mb-6" id="ryze-txt-42" style="pointer-events: auto;">
+                            A Aura Estética Avançada nasceu do desejo de transformar a experiência estética em um ritual de autocuidado profundo. Não acreditamos em padrões impostos, mas na harmonia individual de cada rosto e corpo.
+                        </p>
+                        <p class="text-aura-graphite/70 text-lg leading-relaxed" id="ryze-txt-43" style="pointer-events: auto;">
+                            Nossa equipe é liderada por especialistas que respiram inovação, garantindo que cada protocolo seja tão seguro quanto eficaz. Aqui, você não é apenas um paciente; você é a nossa obra de arte.
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4" data-gsap="stagger">
+                        <div class="space-y-4" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: visible;">
+                            <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&amp;fit=crop&amp;q=80&amp;w=600" alt="Ambiente Spa" class="rounded-2xl w-full h-64 object-cover" onerror="if(!this.dataset.ryzeFallbackApplied){this.dataset.ryzeFallbackApplied='true';this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&amp;fit=crop&amp;w=1400&amp;q=85';this.style.opacity='1';}" id="ryze-img-1" style="pointer-events: auto;">
+                            <div class="bg-aura-olive p-8 rounded-2xl text-white">
+                                <p class="text-3xl font-serif mb-2" style="color: rgb(15, 23, 42); pointer-events: auto;" id="ryze-txt-47">15k+</p>
+                                <p class="text-xs uppercase tracking-widest font-bold opacity-80" style="color: rgb(15, 23, 42); pointer-events: auto;" id="ryze-txt-48">Vidas Transformadas</p>
+                            </div>
+                        </div>
+                        <div class="space-y-4 pt-12" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: visible;">
+                            <div class="bg-aura-gold p-8 rounded-2xl text-white">
+                                <p class="text-3xl font-serif mb-2" style="color: rgb(15, 23, 42); pointer-events: auto;" id="ryze-txt-51">98%</p>
+                                <p class="text-xs uppercase tracking-widest font-bold opacity-80" style="color: rgb(15, 23, 42); pointer-events: auto;" id="ryze-txt-52">Satisfação Real</p>
+                            </div>
+                            <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&amp;fit=crop&amp;q=80&amp;w=600" alt="Skincare Texture" class="rounded-2xl w-full h-64 object-cover" onerror="if(!this.dataset.ryzeFallbackApplied){this.dataset.ryzeFallbackApplied='true';this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&amp;fit=crop&amp;w=1400&amp;q=85';this.style.opacity='1';}" id="ryze-img-2" style="pointer-events: auto;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Values Bento Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6" data-gsap="stagger">
+                    <div class="bento-card group" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: visible;">
+                        <div class="w-14 h-14 bg-aura-olive/10 rounded-2xl flex items-center justify-center text-aura-olive mb-8 group-hover:bg-aura-olive group-hover:text-white transition-all duration-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="microscope" aria-hidden="true" class="lucide lucide-microscope w-7 h-7" id="ryze-icon-3" style="pointer-events: auto;"><path d="M6 18h8"></path><path d="M3 22h18"></path><path d="M14 22a7 7 0 1 0 0-14h-1"></path><path d="M9 14h2"></path><path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z"></path><path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-serif mb-4" style="color: rgb(15, 23, 42); pointer-events: auto;" id="ryze-txt-56">Ciência &amp; Inovação</h3>
+                        <p class="text-aura-graphite/60 text-sm leading-relaxed" id="ryze-txt-57" style="pointer-events: auto;">
+                            Investimos constantemente nas tecnologias aprovadas pelo FDA e ANVISA para garantir resultados de alta performance.
+                        </p>
+                    </div>
+                    <div class="bento-card group" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: visible;">
+                        <div class="w-14 h-14 bg-aura-gold/10 rounded-2xl flex items-center justify-center text-aura-gold mb-8 group-hover:bg-aura-gold group-hover:text-white transition-all duration-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="leaf" aria-hidden="true" class="lucide lucide-leaf w-7 h-7" id="ryze-icon-4" style="pointer-events: auto;"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-serif mb-4" style="color: rgb(15, 23, 42); pointer-events: auto;" id="ryze-txt-60">Naturalidade</h3>
+                        <p class="text-aura-graphite/60 text-sm leading-relaxed" id="ryze-txt-61" style="pointer-events: auto;">
+                            Nossa filosofia "Less is More" foca em resultados que respeitam sua identidade e preservam suas expressões.
+                        </p>
+                    </div>
+                    <div class="bento-card group" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: visible;">
+                        <div class="w-14 h-14 bg-aura-olive/10 rounded-2xl flex items-center justify-center text-aura-olive mb-8 group-hover:bg-aura-olive group-hover:text-white transition-all duration-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="heart" aria-hidden="true" class="lucide lucide-heart w-7 h-7" id="ryze-icon-5" style="pointer-events: auto;"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-serif mb-4" style="color: rgb(15, 23, 42); pointer-events: auto;" id="ryze-txt-64">Cuidado Humanizado</h3>
+                        <p class="text-aura-graphite/60 text-sm leading-relaxed" id="ryze-txt-65" style="pointer-events: auto;">
+                            Cada plano de tratamento é único, desenhado após uma escuta ativa das suas queixas e desejos.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+       <!-- substitua a div 'infinite-scroll-container' antiga por esta -->
+<div class="infinite-scroll-container overflow-hidden w-full relative py-4">
+    <div class="infinite-scroll-track flex gap-6 w-max animate-marquee hover:[animation-play-state:paused]">
+
+        <!-- ================= GRUPO 1 ================= -->
+        <!-- Service 1 -->
+        <div class="service-card bento-card !p-0 overflow-hidden group w-[300px] md:w-[380px] shrink-0 bg-white rounded-2xl shadow-sm">
+            <div class="h-64 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&amp;fit=crop&amp;q=80&amp;w=600" alt="Harmonização Facial" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            </div>
+            <div class="p-8">
+                <h4 class="text-xl font-serif mb-3 text-slate-900">Harmonização Facial</h4>
+                <p class="text-aura-graphite/60 text-sm mb-6 line-clamp-2">Equilíbrio e proporção para realçar seus traços mais bonitos com preenchedores premium.</p>
+                <a href="#agendamento" class="text-aura-olive font-bold text-xs uppercase tracking-widest flex items-center gap-2 group/link text-slate-900">
+                    Saber mais <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 group-hover/link:translate-x-1 transition-transform"><path d="m9 18 6-6-6-6"></path></svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="service-card bento-card !p-0 overflow-hidden group w-[300px] md:w-[380px] shrink-0 bg-white rounded-2xl shadow-sm">
+            <div class="h-64 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&amp;fit=crop&amp;w=1400&amp;q=85" alt="Lavieen" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            </div>
+            <div class="p-8">
+                <h4 class="text-xl font-serif mb-3 text-slate-900">Laser Lavieen</h4>
+                <p class="text-aura-graphite/60 text-sm mb-6 line-clamp-2">O famoso "BB Laser" para uma pele de porcelana, tratando manchas e poros dilatados.</p>
+                <a href="#agendamento" class="text-aura-olive font-bold text-xs uppercase tracking-widest flex items-center gap-2 group/link text-slate-900">
+                    Saber mais <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 group-hover/link:translate-x-1 transition-transform"><path d="m9 18 6-6-6-6"></path></svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="service-card bento-card !p-0 overflow-hidden group w-[300px] md:w-[380px] shrink-0 bg-white rounded-2xl shadow-sm">
+            <div class="h-64 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&amp;fit=crop&amp;q=80&amp;w=600" alt="Protocolo Glow" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            </div>
+            <div class="p-8">
+                <h4 class="text-xl font-serif mb-3 text-slate-900">Protocolo Glow</h4>
+                <p class="text-aura-graphite/60 text-sm mb-6 line-clamp-2">Hidratação profunda e revitalização imediata para eventos e ocasiões especiais.</p>
+                <a href="#agendamento" class="text-aura-olive font-bold text-xs uppercase tracking-widest flex items-center gap-2 group/link text-slate-900">
+                    Saber mais <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 group-hover/link:translate-x-1 transition-transform"><path d="m9 18 6-6-6-6"></path></svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Service 4 -->
+        <div class="service-card bento-card !p-0 overflow-hidden group w-[300px] md:w-[380px] shrink-0 bg-white rounded-2xl shadow-sm">
+            <div class="h-64 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&amp;fit=crop&amp;q=80&amp;w=600" alt="Toxina Botulínica" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            </div>
+            <div class="p-8">
+                <h4 class="text-xl font-serif mb-3 text-slate-900">Toxina Botulínica</h4>
+                <p class="text-aura-graphite/60 text-sm mb-6 line-clamp-2">Prevenção e suavização de rugas de expressão com técnica de aplicação natural.</p>
+                <a href="#agendamento" class="text-aura-olive font-bold text-xs uppercase tracking-widest flex items-center gap-2 group/link text-slate-900">
+                    Saber mais <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 group-hover/link:translate-x-1 transition-transform"><path d="m9 18 6-6-6-6"></path></svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- ================= GRUPO 2 (Cópia idêntica para o loop infinito) ================= -->
+        <div class="service-card bento-card !p-0 overflow-hidden group w-[300px] md:w-[380px] shrink-0 bg-white rounded-2xl shadow-sm" aria-hidden="true">
+            <div class="h-64 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&amp;fit=crop&amp;q=80&amp;w=600" alt="Harmonização Facial" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            </div>
+            <div class="p-8">
+                <h4 class="text-xl font-serif mb-3 text-slate-900">Harmonização Facial</h4>
+                <p class="text-aura-graphite/60 text-sm mb-6 line-clamp-2">Equilíbrio e proporção para realçar seus traços mais bonitos com preenchedores premium.</p>
+                <a href="#agendamento" class="text-aura-olive font-bold text-xs uppercase tracking-widest flex items-center gap-2 group/link text-slate-900">
+                    Saber mais...
+                </a>
+            </div>
+        </div>
+
+        <div class="service-card bento-card !p-0 overflow-hidden group w-[300px] md:w-[380px] shrink-0 bg-white rounded-2xl shadow-sm" aria-hidden="true">
+            <div class="h-64 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&amp;fit=crop&amp;w=1400&amp;q=85" alt="Lavieen" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            </div>
+            <div class="p-8">
+                <h4 class="text-xl font-serif mb-3 text-slate-900">Laser Lavieen</h4>
+                <p class="text-aura-graphite/60 text-sm mb-6 line-clamp-2">O famoso "BB Laser" para uma pele de porcelana, tratando manchas e poros dilatados.</p>
+                <a href="#agendamento" class="text-aura-olive font-bold text-xs uppercase tracking-widest flex items-center gap-2 group/link text-slate-900">
+                    Saber mais...
+                </a>
+            </div>
+        </div>
+
+        <div class="service-card bento-card !p-0 overflow-hidden group w-[300px] md:w-[380px] shrink-0 bg-white rounded-2xl shadow-sm" aria-hidden="true">
+            <div class="h-64 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&amp;fit=crop&amp;q=80&amp;w=600" alt="Protocolo Glow" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            </div>
+            <div class="p-8">
+                <h4 class="text-xl font-serif mb-3 text-slate-900">Protocolo Glow</h4>
+                <p class="text-aura-graphite/60 text-sm mb-6 line-clamp-2">Hidratação profunda e revitalização imediata para eventos e ocasiões especiais.</p>
+                <a href="#agendamento" class="text-aura-olive font-bold text-xs uppercase tracking-widest flex items-center gap-2 group/link text-slate-900">
+                    Saber mais...
+                </a>
+            </div>
+        </div>
+
+        <div class="service-card bento-card !p-0 overflow-hidden group w-[300px] md:w-[380px] shrink-0 bg-white rounded-2xl shadow-sm" aria-hidden="true">
+            <div class="h-64 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&amp;fit=crop&amp;q=80&amp;w=600" alt="Toxina Botulínica" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            </div>
+            <div class="p-8">
+                <h4 class="text-xl font-serif mb-3 text-slate-900">Toxina Botulínica</h4>
+                <p class="text-aura-graphite/60 text-sm mb-6 line-clamp-2">Prevenção e suavização de rugas de expressão com técnica de aplicação natural.</p>
+                <a href="#agendamento" class="text-aura-olive font-bold text-xs uppercase tracking-widest flex items-center gap-2 group/link text-slate-900">
+                    Saber mais...
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+        </section>
+
+        <!-- Pricing & Transparency Section -->
+        <section id="valores" class="py-32 bg-aura-white" data-ryze-id="pricing-section" style="">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                    <div class="lg:col-span-5" data-gsap="reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: visible;">
+                        <h2 class="text-4xl md:text-5xl font-serif mb-8 leading-tight break-words" style="color: rgb(15, 23, 42); pointer-events: auto;" id="ryze-txt-107">Transparência que gera <span class="text-aura-olive italic" id="ryze-txt-108" style="pointer-events: auto;">confiança</span>.</h2>
+                        <p class="text-aura-graphite/70 text-lg leading-relaxed mb-8" id="ryze-txt-109" style="pointer-events: auto;">
+                            Na Aura, acreditamos que a clareza é o primeiro passo para um relacionamento duradouro. Nossos valores refletem a qualidade dos insumos, a expertise da equipe e a tecnologia empregada.
+                        </p>
+                        <div class="p-8 bg-aura-lilac rounded-3xl border border-aura-olive/10">
+                            <h4 class="font-bold mb-4 flex items-center gap-2" style="color: rgb(15, 23, 42); pointer-events: auto;" id="ryze-txt-111">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="info" aria-hidden="true" class="lucide lucide-info w-5 h-5 text-aura-olive" id="ryze-icon-11" style="pointer-events: auto;"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+                                Nota sobre Personalização
+                            </h4>
+                            <p class="text-sm text-aura-graphite/60 leading-relaxed" id="ryze-txt-112" style="pointer-events: auto;">
+                                Os valores abaixo são referenciais para protocolos padrão. O investimento final é definido após a avaliação clínica, onde montamos seu plano personalizado.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-7 space-y-4" data-gsap="stagger">
+                        <!-- Protocol Item -->
+                        <div class="flex items-center justify-between p-6 bg-aura-lilac/50 rounded-2xl border border-aura-olive/5 hover:border-aura-olive/20 transition-all group" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: visible;">
+                            <div>
+                                <h4 class="text-lg font-serif group-hover:text-aura-olive transition-colors" style="color: rgb(15, 23, 42); pointer-events: auto;" id="ryze-txt-116">Protocolo Glow Facial</h4>
+                                <p class="text-xs text-aura-graphite/40 uppercase tracking-widest" id="ryze-txt-117" style="pointer-events: auto;">Sessão Única • 60 min</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-xs text-aura-graphite/40" id="ryze-txt-119" style="pointer-events: auto;">A partir de</p>
+                                <p class="text-xl font-bold text-aura-graphite" id="ryze-txt-120" style="pointer-events: auto;">R$ 450</p>
+                            </div>
+                        </div>
+                        <!-- Protocol Item -->
+                        <div class="flex items-center justify-between p-6 bg-aura-lilac/50 rounded-2xl border border-aura-olive/5 hover:border-aura-olive/20 transition-all group" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: visible;">
+                            <div>
+                                <h4 class="text-lg font-serif group-hover:text-aura-olive transition-colors" style="color: rgb(15, 23, 42); pointer-events: auto;" id="ryze-txt-123">Toxina Botulínica (Full Face)</h4>
+                                <p class="text-xs text-aura-graphite/40 uppercase tracking-widest" id="ryze-txt-124" style="pointer-events: auto;">Aplicação + Retorno</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-xs text-aura-graphite/40" id="ryze-txt-126" style="pointer-events: auto;">A partir de</p>
+                                <p class="text-xl font-bold text-aura-graphite" id="ryze-txt-127" style="pointer-events: auto;">R$ 1.200</p>
+                            </div>
+                        </div>
+                        <!-- Protocol Item -->
+                        <div class="flex items-center justify-between p-6 bg-aura-lilac/50 rounded-2xl border border-aura-olive/5 hover:border-aura-olive/20 transition-all group" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: visible;">
+                            <div>
+                                <h4 class="text-lg font-serif group-hover:text-aura-olive transition-colors" style="color: rgb(15, 23, 42); pointer-events: auto;" id="ryze-txt-130">Bioestimuladores de Colágeno</h4>
+                                <p class="text-xs text-aura-graphite/40 uppercase tracking-widest" id="ryze-txt-131" style="pointer-events: auto;">Sculptra ou Radiesse</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-xs text-aura-graphite/40" id="ryze-txt-133" style="pointer-events: auto;">A partir de</p>
+                                <p class="text-xl font-bold text-aura-graphite" id="ryze-txt-134" style="pointer-events: auto;">R$ 2.800</p>
+                            </div>
+                        </div>
+                        <!-- Protocol Item -->
+                        <div class="flex items-center justify-between p-6 bg-aura-lilac/50 rounded-2xl border border-aura-olive/5 hover:border-aura-olive/20 transition-all group" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: visible;">
+                            <div>
+                                <h4 class="text-lg font-serif group-hover:text-aura-olive transition-colors" style="color: rgb(15, 23, 42); pointer-events: auto;" id="ryze-txt-137">Laser Lavieen (Face)</h4>
+                                <p class="text-xs text-aura-graphite/40 uppercase tracking-widest" id="ryze-txt-138" style="pointer-events: auto;">Protocolo 3 Sessões</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-xs text-aura-graphite/40" id="ryze-txt-140" style="pointer-events: auto;">A partir de</p>
+                                <p class="text-xl font-bold text-aura-graphite" id="ryze-txt-141" style="pointer-events: auto;">R$ 1.800</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Booking Section -->
+        <section id="agendamento" class="py-32 bg-aura-lilac" data-ryze-id="booking-section" style="">
+            <div class="max-w-5xl mx-auto px-6">
+                <div class="bg-white rounded-[40px] p-8 md:p-16 shadow-2xl shadow-aura-olive/5 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-aura-olive/5 rounded-full blur-3xl -mr-32 -mt-32"></div>
+
+                    <div class="text-center mb-16" data-gsap="reveal" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 24px); visibility: visible;">
+                        <h2 class="text-4xl md:text-5xl font-serif mb-4 break-words" style="color: rgb(15, 23, 42); pointer-events: auto;" id="ryze-txt-146">Reserve seu <span class="italic text-aura-olive" id="ryze-txt-147" style="pointer-events: auto;">momento</span>.</h2>
+                        <p class="text-aura-graphite/60" id="ryze-txt-148" style="pointer-events: auto;">Preencha os dados abaixo e nossa equipe entrará em contato para confirmar seu horário.</p>
+                    </div>
+
+                    <form class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8" onsubmit="event.preventDefault(); alert('Solicitação enviada! Entraremos em contato em breve.');">
+                        <div class="space-y-8">
+                            <div class="group">
+                                <label class="text-[10px] uppercase tracking-widest font-bold text-aura-olive" style="color: rgb(15, 23, 42) !important; -webkit-text-fill-color: rgb(15, 23, 42) !important;">Nome Completo</label>
+                                <input type="text" placeholder="Como podemos te chamar?" class="input-aura" required="">
+                            </div>
+                            <div class="group">
+                                <label class="text-[10px] uppercase tracking-widest font-bold text-aura-olive" style="color: rgb(15, 23, 42) !important; -webkit-text-fill-color: rgb(15, 23, 42) !important;">WhatsApp</label>
+                                <input type="tel" placeholder="(00) 00000-0000" class="input-aura" required="">
+                            </div>
+                        </div>
+                        <div class="space-y-8">
+                            <div class="group">
+                                <label class="text-[10px] uppercase tracking-widest font-bold text-aura-olive" style="color: rgb(15, 23, 42) !important; -webkit-text-fill-color: rgb(15, 23, 42) !important;">Procedimento de Interesse</label>
+                                <select class="input-aura appearance-none cursor-pointer">
+                                    <option>Harmonização Facial</option>
+                                    <option>Laser Lavieen</option>
+                                    <option>Protocolo Glow</option>
+                                    <option>Toxina Botulínica</option>
+                                    <option>Outros / Avaliação Geral</option>
+                                </select>
+                            </div>
+                            <div class="group">
+                                <label class="text-[10px] uppercase tracking-widest font-bold text-aura-olive" style="color: rgb(15, 23, 42) !important; -webkit-text-fill-color: rgb(15, 23, 42) !important;">Melhor Período</label>
+                                <div class="flex gap-4 mt-4">
+                                    <label class="flex-1" style="color: rgb(15, 23, 42);">
+                                        <input type="radio" name="periodo" class="hidden peer" checked="">
+                                        <div class="text-center py-3 rounded-xl border border-aura-graphite/10 peer-checked:border-aura-olive peer-checked:bg-aura-olive/5 peer-checked:text-aura-olive cursor-pointer transition-all text-sm font-medium" id="ryze-txt-156" style="pointer-events: auto;">Manhã</div>
+                                    </label>
+                                    <label class="flex-1" style="color: rgb(15, 23, 42);">
+                                        <input type="radio" name="periodo" class="hidden peer">
+                                        <div class="text-center py-3 rounded-xl border border-aura-graphite/10 peer-checked:border-aura-olive peer-checked:bg-aura-olive/5 peer-checked:text-aura-olive cursor-pointer transition-all text-sm font-medium" id="ryze-txt-157" style="pointer-events: auto;">Tarde</div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="md:col-span-2 mt-12">
+                            <button type="submit" class="magnetic-btn w-full bg-aura-olive text-slate-950 py-5 rounded-2xl font-bold text-lg hover:shadow-2xl hover:shadow-aura-olive/40 transition-all flex items-center justify-center gap-3" id="ryze-txt-159" style="pointer-events: auto;">
+                                Solicitar Meu Horário
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="calendar-check" aria-hidden="true" class="lucide lucide-calendar-check w-6 h-6" id="ryze-icon-12" style="pointer-events: auto;"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path><path d="m9 16 2 2 4-4"></path></svg>
+                            </button>
+                            <p class="text-center text-[10px] text-aura-graphite/40 mt-6 uppercase tracking-widest" id="ryze-txt-160" style="pointer-events: auto;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="shield-check" aria-hidden="true" class="lucide lucide-shield-check w-3 h-3 inline mr-1" id="ryze-icon-13" style="pointer-events: auto;"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg> Seus dados estão seguros e protegidos.
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-aura-white pt-24 pb-12 border-t border-aura-olive/10" data-ryze-id="main-footer" id="ryze-bg-7" style="pointer-events: auto;">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
+                <div class="md:col-span-1">
+                    <a href="#home" class="text-3xl font-serif font-semibold text-aura-graphite mb-6 block" id="ryze-txt-164" style="pointer-events: auto;">
+                        AURA<span class="text-aura-olive" style="color: rgb(15, 23, 42) !important; -webkit-text-fill-color: rgb(15, 23, 42) !important; pointer-events: auto;" id="ryze-txt-165">.</span>
+                    </a>
+                    <p class="text-aura-graphite/50 text-sm leading-relaxed mb-8" id="ryze-txt-166" style="pointer-events: auto;">
+                        Redefinindo os padrões de estética avançada com ética, ciência e um olhar artístico singular.
+                    </p>
+                    <div class="flex gap-4">
+                        <div class="flex gap-4">
+    <!-- Instagram (SVG Direto) -->
+    <a href="https://instagram.com/seu_perfil" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full border border-aura-olive/20 flex items-center justify-center text-aura-graphite hover:bg-aura-olive hover:text-slate-950 transition-all" id="ryze-txt-168" style="pointer-events: auto;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
+    </a>
+
+    <!-- Facebook (SVG Direto) -->
+    <a href="https://facebook.com/sua_pagina" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full border border-aura-olive/20 flex items-center justify-center text-aura-graphite hover:bg-aura-olive hover:text-slate-950 transition-all" id="ryze-txt-169" style="pointer-events: auto;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+    </a>
+
+    <!-- WhatsApp (Mantido o seu original que funciona) -->
+    <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full border border-aura-olive/20 flex items-center justify-center text-aura-graphite hover:bg-aura-olive hover:text-slate-950 transition-all" id="ryze-txt-170" style="pointer-events: auto;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle w-5 h-5" id="ryze-icon-16" style="pointer-events: auto;"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"></path></svg>
+    </a>
+</div>
+                    </div>
+                </div>
+
+                <div>
+                    <h5 class="font-bold text-xs uppercase tracking-widest mb-8 text-aura-olive" style="color: rgb(15, 23, 42) !important; -webkit-text-fill-color: rgb(15, 23, 42) !important; pointer-events: auto;" id="ryze-txt-172">Navegação</h5>
+                    <ul class="space-y-4 text-sm text-aura-graphite/60">
+                        <li style="color: rgb(15, 23, 42); pointer-events: auto;" id="ryze-txt-173"><a href="#home" class="hover:text-aura-olive transition-colors" style="color: rgb(15, 23, 42); pointer-events: auto;" id="ryze-txt-174">Início</a></li>
+                        <li style="color: rgb(15, 23, 42); pointer-events: auto;" id="ryze-txt-175"><a href="#sobre" class="hover:text-aura-olive transition-colors" style="color: rgb(15, 23, 42); pointer-events: auto;" id="ryze-txt-176">Sobre Nós</a></li>
+                        <li style="color: rgb(15, 23, 42); pointer-events: auto;" id="ryze-txt-177"><a href="#servicos" class="hover:text-aura-olive transition-colors" style="color: rgb(15, 23, 42); pointer-events: auto;" id="ryze-txt-178">Serviços</a></li>
+                        <li style="color: rgb(15, 23, 42); pointer-events: auto;" id="ryze-txt-179"><a href="#valores" class="hover:text-aura-olive transition-colors" style="color: rgb(15, 23, 42); pointer-events: auto;" id="ryze-txt-180">Valores</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="font-bold text-xs uppercase tracking-widest mb-8 text-aura-olive" style="color: rgb(15, 23, 42) !important; -webkit-text-fill-color: rgb(15, 23, 42) !important; pointer-events: auto;" id="ryze-txt-182">Localização</h5>
+                    <p class="text-sm text-aura-graphite/60 leading-relaxed mb-4" id="ryze-txt-183" style="pointer-events: auto;">
+                        Av. Brigadeiro Faria Lima, 4500<br>
+                        Itaim Bibi, São Paulo - SP<br>
+                        CEP: 04538-132
+                    </p>
+                    <a href="https://maps.google.com" target="_blank" class="text-aura-olive text-xs font-bold uppercase tracking-widest flex items-center gap-2 hover:underline" style="color: rgb(15, 23, 42) !important; -webkit-text-fill-color: rgb(15, 23, 42) !important; pointer-events: auto;" id="ryze-txt-184">
+                        Ver no Maps <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="map-pin" aria-hidden="true" class="lucide lucide-map-pin w-3 h-3" id="ryze-icon-17" style="pointer-events: auto;"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    </a>
+                </div>
+
+                <div>
+                    <h5 class="font-bold text-xs uppercase tracking-widest mb-8 text-aura-olive" style="color: rgb(15, 23, 42) !important; -webkit-text-fill-color: rgb(15, 23, 42) !important; pointer-events: auto;" id="ryze-txt-186">Contato</h5>
+                    <p class="text-sm text-aura-graphite/60 mb-2" id="ryze-txt-187" style="pointer-events: auto;">contato@auraestetica.com.br</p>
+                    <p class="text-sm text-aura-graphite/60 mb-6" id="ryze-txt-188" style="pointer-events: auto;">(11) 99999-9999</p>
+                    <div class="p-4 bg-aura-lilac rounded-xl border border-aura-olive/10">
+                        <p class="text-[10px] text-aura-graphite/40 uppercase font-bold mb-1" id="ryze-txt-190" style="pointer-events: auto;">Horário de Atendimento</p>
+                        <p class="text-xs text-aura-graphite/60" id="ryze-txt-191" style="pointer-events: auto;">Seg - Sex: 09h às 20h<br>Sáb: 09h às 14h</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-12 border-t border-aura-olive/5 flex flex-col md:flex-row justify-between items-center gap-6">
+                <p class="text-[10px] text-aura-graphite/40 uppercase tracking-widest" id="ryze-txt-193" style="pointer-events: auto;">
+                    © 2026 Aura Estética Avançada. Todos os direitos reservados.
+                </p>
+                <div class="flex gap-8 text-[10px] text-aura-graphite/40 uppercase tracking-widest">
+                    <a href="#" class="hover:text-aura-olive transition-colors" style="color: rgb(15, 23, 42); pointer-events: auto;" id="ryze-txt-195">Privacidade</a>
+                    <a href="#" class="hover:text-aura-olive transition-colors" style="color: rgb(15, 23, 42); pointer-events: auto;" id="ryze-txt-196">Termos de Uso</a>
+                    <span style="color: rgb(15, 23, 42); pointer-events: auto;" id="ryze-txt-197">RT Médica: Dra. Ana Silva CRM/SP 123456</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Reveal Animations
+        document.querySelectorAll('[data-gsap="reveal"]').forEach(el => {
+            gsap.from(el, {
+                scrollTrigger: {
+                    trigger: el,
+                    start: "top 85%",
+                },
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                ease: "power3.out"
+            });
+        });
+
+        // Fade Scale Animations
+        document.querySelectorAll('[data-gsap="fade-scale"]').forEach(el => {
+            gsap.from(el, {
+                scrollTrigger: {
+                    trigger: el,
+                    start: "top 85%",
+                },
+                scale: 0.9,
+                opacity: 0,
+                duration: 1.2,
+                ease: "power2.out"
+            });
+        });
+
+        // Clip Up Animations
+        document.querySelectorAll('[data-gsap="clip-up"]').forEach(el => {
+            gsap.from(el, {
+                scrollTrigger: {
+                    trigger: el,
+                    start: "top 85%",
+                },
+                y: 100,
+                opacity: 0,
+                duration: 1,
+                ease: "power4.out"
+            });
+        });
+
+        // Stagger Animations
+        document.querySelectorAll('[data-gsap="stagger"]').forEach(container => {
+            gsap.from(container.children, {
+                scrollTrigger: {
+                    trigger: container,
+                    start: "top 85%",
+                },
+                y: 30,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.2,
+                ease: "power2.out"
+            });
+        });
+
+        // Magnetic Button Effect
+        const magneticBtns = document.querySelectorAll('.magnetic-btn');
+        magneticBtns.forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = `translate(0, 0)`;
+            });
+        });
+
+        // Smooth Scroll for all anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+
+<script id="ryze-runtime-compat">
+(function() {
+  if (window.__RYZE_COMPAT_BOOTED__) return;
+  window.__RYZE_COMPAT_BOOTED__ = true;
+
+  function safe(fn) {
+    try { fn(); } catch (error) { console.warn('[Ryze compatibility]', error); }
+  }
+
+  function initLucide() {
+    safe(function() {
+      if (window.lucide && typeof window.lucide.createIcons === 'function') window.lucide.createIcons();
+    });
+  }
+
+  function initSwiper() {
+    safe(function() {
+      if (!window.Swiper) return;
+      document.querySelectorAll('.swiper, .swiper-container, [data-swiper]').forEach(function(root) {
+        if (root.__ryzeSwiper || !root.querySelector('.swiper-slide')) return;
+        var options = {};
+        try {
+          var rawOptions = root.getAttribute('data-swiper-options') || root.getAttribute('data-settings') || '';
+          if (rawOptions) options = JSON.parse(rawOptions.replace(/&quot;/g, '"'));
+        } catch (error) {}
+        root.__ryzeSwiper = new window.Swiper(root, {
+          ...(options || {}),
+          loop: root.querySelectorAll('.swiper-slide').length > 1,
+          slidesPerView: root.getAttribute('data-slides-per-view') || 1,
+          spaceBetween: Number(root.getAttribute('data-space-between') || 24),
+          pagination: root.querySelector('.swiper-pagination') ? { el: root.querySelector('.swiper-pagination'), clickable: true } : undefined,
+          navigation: root.querySelector('.swiper-button-next') ? { nextEl: root.querySelector('.swiper-button-next'), prevEl: root.querySelector('.swiper-button-prev') } : undefined,
+          autoplay: root.hasAttribute('data-autoplay') ? { delay: Number(root.getAttribute('data-autoplay') || 3500), disableOnInteraction: false } : false,
+        });
+      });
+    });
+  }
+
+  function initLottie() {
+    safe(function() {
+      if (!window.lottie) return;
+      document.querySelectorAll('[data-lottie], [data-lottie-src], .lottie, .lottie-player, lottie-player').forEach(function(el) {
+        if (el.__ryzeLottie) return;
+        var path = el.getAttribute('data-lottie-src') || el.getAttribute('data-src') || el.getAttribute('data-animation-path') || el.getAttribute('src');
+        if (!path || !/\.json(?:\?|$)/i.test(path)) return;
+        el.__ryzeLottie = window.lottie.loadAnimation({
+          container: el,
+          renderer: 'svg',
+          loop: el.getAttribute('data-loop') !== 'false',
+          autoplay: el.getAttribute('data-autoplay') !== 'false',
+          path: path
+        });
+      });
+    });
+  }
+
+  function initGsap() {
+    safe(function() {
+      if (!window.gsap) return;
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (window.ScrollTrigger && window.gsap.registerPlugin) window.gsap.registerPlugin(window.ScrollTrigger);
+
+      function scrollTriggerFor(el, start) {
+        return window.ScrollTrigger ? { trigger: el, start: start || 'top 88%' } : undefined;
+      }
+
+      function bindHover(el, enter, leave, move) {
+        if (el.__ryzeGsapHoverCleanup) el.__ryzeGsapHoverCleanup();
+        el.addEventListener('mouseenter', enter);
+        el.addEventListener('mouseleave', leave);
+        if (move) el.addEventListener('mousemove', move);
+        el.__ryzeGsapHoverCleanup = function() {
+          el.removeEventListener('mouseenter', enter);
+          el.removeEventListener('mouseleave', leave);
+          if (move) el.removeEventListener('mousemove', move);
+        };
+      }
+
+      document.querySelectorAll('[data-gsap="reveal"], [data-gsap-reveal], .gsap-reveal, [data-animate="reveal"]').forEach(function(el, index) {
+        if (el.__ryzeGsapReveal) return;
+        el.__ryzeGsapReveal = true;
+        window.gsap.fromTo(el, { autoAlpha: 0, y: 24 }, {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.8,
+          delay: Math.min(index * 0.05, 0.4),
+          ease: 'power3.out',
+          scrollTrigger: scrollTriggerFor(el)
+        });
+      });
+
+      document.querySelectorAll('[data-gsap="fade-scale"], .gsap-fade-scale').forEach(function(el, index) {
+        if (el.__ryzeGsapFadeScale) return;
+        el.__ryzeGsapFadeScale = true;
+        window.gsap.fromTo(el, { autoAlpha: 0, y: 18, scale: 0.965, filter: 'blur(10px)' }, {
+          autoAlpha: 1,
+          y: 0,
+          scale: 1,
+          filter: 'blur(0px)',
+          duration: Number(el.getAttribute('data-gsap-duration') || 0.88),
+          delay: Math.min(index * 0.04, 0.28),
+          ease: el.getAttribute('data-gsap-ease') || 'power3.out',
+          scrollTrigger: scrollTriggerFor(el)
+        });
+      });
+
+      document.querySelectorAll('[data-gsap="clip-up"], [data-gsap="mask-reveal"], .gsap-clip-up').forEach(function(el) {
+        if (el.__ryzeGsapClipUp) return;
+        el.__ryzeGsapClipUp = true;
+        window.gsap.fromTo(el, { autoAlpha: 0, y: 22, clipPath: 'inset(0 0 100% 0)' }, {
+          autoAlpha: 1,
+          y: 0,
+          clipPath: 'inset(0 0 0% 0)',
+          duration: Number(el.getAttribute('data-gsap-duration') || 0.95),
+          ease: el.getAttribute('data-gsap-ease') || 'power4.out',
+          scrollTrigger: scrollTriggerFor(el, 'top 86%')
+        });
+      });
+
+      document.querySelectorAll('[data-gsap="text-rise"], .gsap-text-rise').forEach(function(el) {
+        if (el.__ryzeGsapTextRise) return;
+        el.__ryzeGsapTextRise = true;
+        window.gsap.fromTo(el, { autoAlpha: 0, y: 20, filter: 'blur(8px)' }, {
+          autoAlpha: 1,
+          y: 0,
+          filter: 'blur(0px)',
+          duration: Number(el.getAttribute('data-gsap-duration') || 0.82),
+          ease: el.getAttribute('data-gsap-ease') || 'power3.out',
+          scrollTrigger: scrollTriggerFor(el, 'top 90%')
+        });
+      });
+
+      document.querySelectorAll('[data-gsap="blur-in"], .gsap-blur-in').forEach(function(el, index) {
+        if (el.__ryzeGsapBlurIn) return;
+        el.__ryzeGsapBlurIn = true;
+        window.gsap.fromTo(el, { autoAlpha: 0, y: 34, scale: 0.985, filter: 'blur(18px)' }, {
+          autoAlpha: 1,
+          y: 0,
+          scale: 1,
+          filter: 'blur(0px)',
+          duration: Number(el.getAttribute('data-gsap-duration') || 1.02),
+          delay: Math.min(index * 0.035, 0.24),
+          ease: el.getAttribute('data-gsap-ease') || 'power3.out',
+          scrollTrigger: scrollTriggerFor(el, 'top 88%')
+        });
+      });
+
+      document.querySelectorAll('[data-gsap="rotate-in"], .gsap-rotate-in').forEach(function(el, index) {
+        if (el.__ryzeGsapRotateIn) return;
+        el.__ryzeGsapRotateIn = true;
+        window.gsap.fromTo(el, { autoAlpha: 0, y: 32, rotateX: 7, transformPerspective: 900, transformOrigin: '50% 70%' }, {
+          autoAlpha: 1,
+          y: 0,
+          rotateX: 0,
+          duration: Number(el.getAttribute('data-gsap-duration') || 0.96),
+          delay: Math.min(index * 0.035, 0.22),
+          ease: el.getAttribute('data-gsap-ease') || 'power3.out',
+          scrollTrigger: scrollTriggerFor(el, 'top 88%')
+        });
+      });
+
+      document.querySelectorAll('[data-gsap="track-in"], .gsap-track-in').forEach(function(el) {
+        if (el.__ryzeGsapTrackIn) return;
+        el.__ryzeGsapTrackIn = true;
+        var targetSpacing = window.getComputedStyle(el).letterSpacing || 'normal';
+        window.gsap.fromTo(el, { autoAlpha: 0, y: 20, letterSpacing: '0.08em', filter: 'blur(8px)' }, {
+          autoAlpha: 1,
+          y: 0,
+          letterSpacing: targetSpacing,
+          filter: 'blur(0px)',
+          duration: Number(el.getAttribute('data-gsap-duration') || 0.92),
+          ease: el.getAttribute('data-gsap-ease') || 'power3.out',
+          scrollTrigger: scrollTriggerFor(el, 'top 90%')
+        });
+      });
+
+      document.querySelectorAll('[data-gsap="media-zoom"], .gsap-media-zoom').forEach(function(el) {
+        if (el.__ryzeGsapMediaZoom) return;
+        el.__ryzeGsapMediaZoom = true;
+        window.gsap.fromTo(el, { autoAlpha: 0, scale: 1.08, filter: 'blur(10px)' }, {
+          autoAlpha: 1,
+          scale: 1,
+          filter: 'blur(0px)',
+          duration: Number(el.getAttribute('data-gsap-duration') || 1.05),
+          ease: el.getAttribute('data-gsap-ease') || 'power3.out',
+          scrollTrigger: scrollTriggerFor(el, 'top 88%')
+        });
+      });
+
+      document.querySelectorAll('[data-gsap="image-pan"], .gsap-image-pan').forEach(function(el) {
+        if (el.__ryzeGsapImagePan) return;
+        el.__ryzeGsapImagePan = true;
+        window.gsap.fromTo(el, { autoAlpha: 0, scale: 1.06, xPercent: -1.5, filter: 'blur(8px)' }, {
+          autoAlpha: 1,
+          scale: 1,
+          xPercent: 0,
+          filter: 'blur(0px)',
+          duration: Number(el.getAttribute('data-gsap-duration') || 1.12),
+          ease: el.getAttribute('data-gsap-ease') || 'power3.out',
+          scrollTrigger: scrollTriggerFor(el, 'top 88%')
+        });
+        bindHover(
+          el,
+          function() { window.gsap.to(el, { scale: 1.035, duration: 0.45, ease: 'power2.out' }); },
+          function() { window.gsap.to(el, { scale: 1, xPercent: 0, duration: 0.45, ease: 'power3.out' }); },
+          function(event) {
+            var rect = el.getBoundingClientRect();
+            var x = ((event.clientX - rect.left) / rect.width - 0.5) * -2.4;
+            window.gsap.to(el, { xPercent: x, duration: 0.45, ease: 'power2.out' });
+          }
+        );
+      });
+
+      document.querySelectorAll('[data-gsap="stagger"], [data-gsap-stagger], .gsap-stagger').forEach(function(root) {
+        if (root.__ryzeGsapStagger) return;
+        root.__ryzeGsapStagger = true;
+        var selector = root.getAttribute('data-gsap-target') || ':scope > *';
+        var children = [];
+        try { children = Array.from(root.querySelectorAll(selector)); } catch (error) { children = Array.from(root.children); }
+        if (!children.length) return;
+        window.gsap.fromTo(children, { autoAlpha: 0, y: 18 }, {
+          autoAlpha: 1,
+          y: 0,
+          duration: Number(root.getAttribute('data-gsap-duration') || 0.7),
+          stagger: Number(root.getAttribute('data-gsap-stagger') || 0.08),
+          ease: root.getAttribute('data-gsap-ease') || 'power3.out',
+          scrollTrigger: scrollTriggerFor(root)
+        });
+      });
+
+      document.querySelectorAll('[data-gsap="timeline"], .gsap-timeline').forEach(function(root) {
+        if (root.__ryzeGsapTimeline) return;
+        root.__ryzeGsapTimeline = true;
+        var children = Array.from(root.children || []).filter(function(child) {
+          return child.offsetWidth > 0 && child.offsetHeight > 0;
+        }).slice(0, 18);
+        if (!children.length) return;
+        window.gsap.fromTo(children, { autoAlpha: 0, x: -18, filter: 'blur(6px)' }, {
+          autoAlpha: 1,
+          x: 0,
+          filter: 'blur(0px)',
+          duration: Number(root.getAttribute('data-gsap-duration') || 0.72),
+          stagger: Number(root.getAttribute('data-gsap-stagger') || 0.1),
+          ease: root.getAttribute('data-gsap-ease') || 'power3.out',
+          scrollTrigger: scrollTriggerFor(root, 'top 86%')
+        });
+      });
+
+      document.querySelectorAll('[data-gsap="scrub-fade"], .gsap-scrub-fade').forEach(function(el) {
+        if (el.__ryzeGsapScrubFade) return;
+        el.__ryzeGsapScrubFade = true;
+        if (!window.ScrollTrigger) {
+          window.gsap.fromTo(el, { autoAlpha: 0, y: 26 }, { autoAlpha: 1, y: 0, duration: 0.8, ease: 'power3.out' });
+          return;
+        }
+        window.gsap.fromTo(el, { autoAlpha: 0.55, y: 54, scale: 0.985, filter: 'blur(8px)' }, {
+          autoAlpha: 1,
+          y: 0,
+          scale: 1,
+          filter: 'blur(0px)',
+          ease: 'none',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 92%',
+            end: 'top 48%',
+            scrub: 0.65
+          }
+        });
+      });
+
+      document.querySelectorAll('[data-gsap="parallax"], [data-gsap-parallax], .gsap-parallax').forEach(function(el) {
+        if (el.__ryzeGsapParallax || !window.ScrollTrigger) return;
+        el.__ryzeGsapParallax = true;
+        window.gsap.to(el, {
+          yPercent: Number(el.getAttribute('data-gsap-y') || -12),
+          ease: 'none',
+          scrollTrigger: {
+            trigger: el.closest('section') || el,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true
+          }
+        });
+      });
+
+      document.querySelectorAll('[data-gsap="float"], .gsap-float').forEach(function(el) {
+        if (el.__ryzeGsapFloat) return;
+        el.__ryzeGsapFloat = true;
+        window.gsap.to(el, {
+          y: Number(el.getAttribute('data-gsap-y') || -10),
+          rotate: Number(el.getAttribute('data-gsap-rotate') || 0.35),
+          duration: Number(el.getAttribute('data-gsap-duration') || 3.2),
+          yoyo: true,
+          repeat: -1,
+          ease: 'sine.inOut'
+        });
+      });
+
+      document.querySelectorAll('[data-gsap="card-lift"], .gsap-card-lift').forEach(function(el) {
+        if (el.__ryzeGsapCardLift) return;
+        el.__ryzeGsapCardLift = true;
+        bindHover(
+          el,
+          function() { window.gsap.to(el, { y: -8, scale: 1.012, duration: 0.24, ease: 'power2.out' }); },
+          function() { window.gsap.to(el, { y: 0, scale: 1, rotateX: 0, rotateY: 0, duration: 0.34, ease: 'power3.out' }); }
+        );
+      });
+
+      document.querySelectorAll('[data-gsap="tilt-depth"], .gsap-tilt-depth').forEach(function(el) {
+        if (el.__ryzeGsapTiltDepth) return;
+        el.__ryzeGsapTiltDepth = true;
+        bindHover(
+          el,
+          function() { window.gsap.to(el, { y: -7, scale: 1.012, duration: 0.22, ease: 'power2.out' }); },
+          function() { window.gsap.to(el, { y: 0, scale: 1, rotateX: 0, rotateY: 0, duration: 0.42, ease: 'power3.out' }); },
+          function(event) {
+            var rect = el.getBoundingClientRect();
+            var px = (event.clientX - rect.left) / rect.width - 0.5;
+            var py = (event.clientY - rect.top) / rect.height - 0.5;
+            window.gsap.to(el, { rotateY: px * 5.5, rotateX: py * -5.5, transformPerspective: 1000, duration: 0.26, ease: 'power2.out' });
+          }
+        );
+      });
+
+      document.querySelectorAll('[data-gsap="magnetic"], [data-gsap="magnetic-cta"], .gsap-magnetic').forEach(function(el) {
+        if (el.__ryzeGsapMagnetic) return;
+        el.__ryzeGsapMagnetic = true;
+        bindHover(
+          el,
+          function() { window.gsap.to(el, { scale: 1.025, duration: 0.2, ease: 'power2.out' }); },
+          function() { window.gsap.to(el, { x: 0, y: 0, scale: 1, duration: 0.36, ease: 'elastic.out(1, 0.55)' }); },
+          function(event) {
+            var rect = el.getBoundingClientRect();
+            var x = (event.clientX - rect.left - rect.width / 2) * 0.16;
+            var y = (event.clientY - rect.top - rect.height / 2) * 0.2;
+            window.gsap.to(el, { x: x, y: y, duration: 0.22, ease: 'power2.out' });
+          }
+        );
+      });
+
+      document.querySelectorAll('[data-gsap="spotlight"], .gsap-spotlight').forEach(function(el) {
+        if (el.__ryzeGsapSpotlight) return;
+        el.__ryzeGsapSpotlight = true;
+        var computedBackground = window.getComputedStyle(el);
+        var originalBackground = el.style.background || (computedBackground.backgroundImage && computedBackground.backgroundImage !== 'none'
+          ? computedBackground.backgroundImage + ', ' + computedBackground.backgroundColor
+          : computedBackground.backgroundColor) || 'transparent';
+        bindHover(
+          el,
+          function() { window.gsap.to(el, { scale: 1.01, duration: 0.22, ease: 'power2.out' }); },
+          function() {
+            window.gsap.to(el, { scale: 1, duration: 0.28, ease: 'power3.out' });
+            el.style.background = originalBackground;
+          },
+          function(event) {
+            var rect = el.getBoundingClientRect();
+            var x = Math.round(((event.clientX - rect.left) / rect.width) * 100);
+            var y = Math.round(((event.clientY - rect.top) / rect.height) * 100);
+            el.style.background = 'radial-gradient(circle at ' + x + '% ' + y + '%, rgba(255,255,255,0.13), transparent 32%), ' + originalBackground;
+          }
+        );
+      });
+
+      document.querySelectorAll('[data-gsap-counter]').forEach(function(el) {
+        if (el.__ryzeGsapCounter) return;
+        var target = Number(el.getAttribute('data-gsap-counter'));
+        if (!Number.isFinite(target)) return;
+        el.__ryzeGsapCounter = true;
+        var state = { value: Number(el.getAttribute('data-gsap-from') || 0) };
+        window.gsap.to(state, {
+          value: target,
+          duration: Number(el.getAttribute('data-gsap-duration') || 1.2),
+          ease: 'power2.out',
+          scrollTrigger: window.ScrollTrigger ? { trigger: el, start: 'top 90%' } : undefined,
+          onUpdate: function() {
+            el.textContent = Math.round(state.value).toLocaleString('pt-BR');
+          }
+        });
+      });
+    });
+  }
+
+  function initElementorWidgets() {
+    safe(function() {
+      document.querySelectorAll('.elementor-accordion, .elementor-toggle').forEach(function(root) {
+        if (root.__ryzeAccordion) return;
+        root.__ryzeAccordion = true;
+        root.querySelectorAll('.elementor-tab-title, .elementor-toggle-title').forEach(function(title) {
+          title.addEventListener('click', function() {
+            var item = title.closest('.elementor-accordion-item, .elementor-toggle-item') || title.parentElement;
+            var content = item && item.querySelector('.elementor-tab-content, .elementor-toggle-content');
+            if (!content) return;
+            var active = content.classList.toggle('elementor-active');
+            title.classList.toggle('elementor-active', active);
+            content.style.display = active ? 'block' : 'none';
+          });
+        });
+      });
+
+      document.querySelectorAll('[data-ryze-counter-to], .elementor-counter-number').forEach(function(counter) {
+        if (counter.__ryzeCounter) return;
+        counter.__ryzeCounter = true;
+        var target = Number(counter.getAttribute('data-ryze-counter-to') || String(counter.textContent || '').replace(/[^\d.-]/g, ''));
+        if (!Number.isFinite(target)) return;
+        var start = 0;
+        var duration = 900;
+        var startedAt = performance.now();
+        function tick(now) {
+          var progress = Math.min(1, (now - startedAt) / duration);
+          var value = Math.round(start + (target - start) * progress);
+          counter.textContent = value.toLocaleString('pt-BR');
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      });
+    });
+  }
+
+  function repairStuckVisibility() {
+    safe(function() {
+      document.querySelectorAll('[class*="noise"], [id*="noise"], [class*="ruido"], [id*="ruido"], [class*="grain"], [id*="grain"], [class*="static"], [id*="static"], [class*="scanline"], [id*="scanline"], [class*="texture"], [id*="texture"]').forEach(function(el) {
+        var opacity = Number(window.getComputedStyle(el).opacity || 1);
+        if (!Number.isFinite(opacity) || opacity > 0.04) el.style.opacity = '0.025';
+        el.style.pointerEvents = 'none';
+      });
+
+      var selectors = 'main, section, header, footer, [data-ryze-id], .page-section.active';
+      document.querySelectorAll(selectors).forEach(function(el) {
+        var style = window.getComputedStyle(el);
+        var hasRuntimeAnimation = /swiper|gsap|lottie|three|motion/i.test(el.className || '') || el.hasAttribute('data-gsap') || el.hasAttribute('data-gsap-reveal') || el.hasAttribute('data-gsap-stagger') || el.hasAttribute('data-gsap-parallax');
+        if (!hasRuntimeAnimation && style.opacity === '0') el.style.opacity = '1';
+        if (!hasRuntimeAnimation && style.visibility === 'hidden') el.style.visibility = 'visible';
+      });
+      document.documentElement.style.minHeight = document.documentElement.style.minHeight || '100%';
+      document.body.style.minHeight = document.body.style.minHeight || '100%';
+    });
+  }
+
+  function parseColor(value) {
+    value = String(value || '').trim().toLowerCase();
+    if (!value || value === 'transparent') return null;
+    if (value === 'white') return { r: 255, g: 255, b: 255, a: 1 };
+    if (value === 'black') return { r: 0, g: 0, b: 0, a: 1 };
+    if (/^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(value)) {
+      var hex = value.slice(1);
+      if (hex.length === 3) hex = hex.split('').map(function(part) { return part + part; }).join('');
+      return {
+        r: parseInt(hex.slice(0, 2), 16),
+        g: parseInt(hex.slice(2, 4), 16),
+        b: parseInt(hex.slice(4, 6), 16),
+        a: 1
+      };
+    }
+    var match = value.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/i);
+    if (!match) return null;
+    return {
+      r: Number(match[1]),
+      g: Number(match[2]),
+      b: Number(match[3]),
+      a: match[4] == null ? 1 : Number(match[4])
+    };
+  }
+
+  function channelLuminance(channel) {
+    var normalized = channel / 255;
+    return normalized <= 0.03928 ? normalized / 12.92 : Math.pow((normalized + 0.055) / 1.055, 2.4);
+  }
+
+  function relativeLuminance(color) {
+    return 0.2126 * channelLuminance(color.r) + 0.7152 * channelLuminance(color.g) + 0.0722 * channelLuminance(color.b);
+  }
+
+  function contrastRatio(left, right) {
+    var l1 = relativeLuminance(left);
+    var l2 = relativeLuminance(right);
+    var light = Math.max(l1, l2);
+    var dark = Math.min(l1, l2);
+    return (light + 0.05) / (dark + 0.05);
+  }
+
+  function blendColors(top, bottom) {
+    var alpha = Math.max(0, Math.min(1, top && top.a == null ? 1 : top.a));
+    return {
+      r: Math.round((top.r * alpha) + (bottom.r * (1 - alpha))),
+      g: Math.round((top.g * alpha) + (bottom.g * (1 - alpha))),
+      b: Math.round((top.b * alpha) + (bottom.b * (1 - alpha))),
+      a: 1
+    };
+  }
+
+  function findReadableBackground(el) {
+    var fallback = parseColor(window.getComputedStyle(document.body).backgroundColor)
+      || parseColor(window.getComputedStyle(document.documentElement).backgroundColor)
+      || { r: 255, g: 255, b: 255, a: 1 };
+    if (fallback.a < 1) fallback = blendColors(fallback, { r: 255, g: 255, b: 255, a: 1 });
+
+    var layers = [];
+    var current = el;
+    while (current) {
+      var parsed = parseColor(window.getComputedStyle(current).backgroundColor);
+      if (parsed && parsed.a > 0.01) layers.push(parsed);
+      current = current.parentElement;
+    }
+
+    var background = fallback;
+    for (var i = layers.length - 1; i >= 0; i -= 1) {
+      background = blendColors(layers[i], background);
+    }
+    return background;
+  }
+
+  function repairLowContrastText() {
+    safe(function() {
+      document.querySelectorAll('h1,h2,h3,h4,h5,h6,p,li,a,button,label,strong,small,blockquote,span,em,figcaption,summary').forEach(function(el) {
+        if (!el || !el.textContent || !el.textContent.trim()) return;
+        if (el.closest('[data-ryze-ignore="true"], svg, [aria-hidden="true"]')) return;
+        var style = window.getComputedStyle(el);
+        if (style.display === 'none' || style.visibility === 'hidden' || Number(style.opacity || 1) < 0.12) return;
+        if (style.webkitBackgroundClip === 'text' || style.backgroundClip === 'text') return;
+        var textFillColor = style.webkitTextFillColor && style.webkitTextFillColor !== 'currentcolor' ? style.webkitTextFillColor : '';
+        var foreground = parseColor(textFillColor) || parseColor(style.color);
+        var background = findReadableBackground(el);
+        if (!foreground || !background) return;
+        var ratio = contrastRatio(foreground, background);
+        if (ratio >= 4.35) return;
+        var readable = relativeLuminance(background) < 0.45 ? '#f8fafc' : '#0f172a';
+        el.style.setProperty('color', readable, 'important');
+        el.style.setProperty('-webkit-text-fill-color', readable, 'important');
+        if (ratio < 2.4) el.style.setProperty('text-shadow', 'none', 'important');
+        el.setAttribute('data-ryze-contrast-repaired', 'true');
+      });
+    });
+  }
+
+  function initAll() {
+    initLucide();
+    initSwiper();
+    initLottie();
+    initGsap();
+    initElementorWidgets();
+    repairStuckVisibility();
+    repairLowContrastText();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAll, { once: true });
+  } else {
+    initAll();
+  }
+  window.addEventListener('load', initAll);
+  setTimeout(initAll, 350);
+  setTimeout(initAll, 1200);
+  setTimeout(initAll, 2400);
+})();
+</script>
+    <script id="ryze-core-navigation">
+        // Garantir que a navegação funcione mesmo em sites estáticos
+        window.navigateTo = function(id) {
+            const targetId = id.startsWith('#') ? id.substring(1) : id;
+            const target = document.getElementById(targetId) || document.querySelector('[data-ryze-id="' + targetId + '"]');
+            if (target) {
+                const offset = 80;
+                const bodyRect = document.body.getBoundingClientRect().top;
+                const elementRect = target.getBoundingClientRect().top;
+                const elementPosition = elementRect - bodyRect;
+                const offsetPosition = elementPosition - offset;
+                window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+            }
+        };
+
+        (function() {
+            const setupNav = () => {
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        const href = this.getAttribute('href');
+                        if (!href || href === "#" || href.length < 2) return;
+                        e.preventDefault();
+                        window.navigateTo(href.substring(1));
+                    });
+                });
+            };
+
+            const fixInteractivity = () => {
+                const elementsToDisable = document.querySelectorAll('.noise-overlay, .custom-cursor, #cursor, [class*="cursor"], canvas[style*="fixed"], canvas[style*="absolute"]');
+                elementsToDisable.forEach(el => {
+                    const style = window.getComputedStyle(el);
+                    if (style.position === 'fixed' || style.position === 'absolute') {
+                        el.style.pointerEvents = 'none';
+                        el.style.userSelect = 'none';
+                        el.style.willChange = 'transform';
+                        el.style.transform = 'translateZ(0)';
+                    }
+                });
+
+                document.body.style.pointerEvents = 'auto';
+                document.documentElement.style.pointerEvents = 'auto';
+
+                const nav = document.querySelector('nav, header, [data-ryze-id="navbar"], .fixed.top-0');
+                if (nav) {
+                    nav.style.zIndex = '99999';
+                    nav.style.pointerEvents = 'auto';
+                    nav.querySelectorAll('a, button').forEach(link => {
+                        link.style.pointerEvents = 'auto';
+                        link.style.position = 'relative';
+                        link.style.zIndex = '100000';
+                    });
+                }
+
+                document.documentElement.style.overflow = '';
+                document.body.style.overflow = '';
+                document.body.style.height = 'auto';
+            };
+
+            const style = document.createElement('style');
+            style.textContent = ' * { backface-visibility: hidden; -webkit-font-smoothing: antialiased; } .noise-overlay, canvas { pointer-events: none !important; will-change: transform; } nav, header, [data-ryze-id="navbar"] { pointer-events: auto !important; } button, a { cursor: pointer !important; pointer-events: auto !important; } ';
+            document.head.appendChild(style);
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', () => { setupNav(); fixInteractivity(); });
+            } else {
+                setupNav(); fixInteractivity();
+            }
+            setTimeout(fixInteractivity, 1500);
+            window.addEventListener('load', fixInteractivity);
+        })();
+    </script>
+</body></html>
